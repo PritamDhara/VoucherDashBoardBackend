@@ -1,6 +1,7 @@
 package com.va.voucher_request.repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,14 @@ public interface VoucherRequestRepository extends MongoRepository<VoucherRequest
 	List<VoucherRequest> findByCandidateEmail(String candidateEmail);
 
 	VoucherRequest findByVoucherCode(String voucherCode);
+	 
+	boolean existsByCloudExamAndCandidateEmail(String cloudExam , String candiadateEmail);
+	
+	String getExamResultByCloudExamAndCandidateEmail(String examName,  String userEmail);
 
-	boolean existsByCloudExamAndCandidateEmail(String cloudExam, String candidateEmail);
+	Optional<VoucherRequest> findByCandidateEmailAndCloudExam(String candidateEmail, String cloudExam);
+
+	boolean existsByCandidateEmail(String candidateEmail);
+
 }
+
