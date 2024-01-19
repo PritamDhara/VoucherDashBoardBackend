@@ -1,0 +1,5 @@
+springdoc.swagger-ui.path=/swagger-ui.html
+# Enable or disable Swagger UI
+springdoc.swagger-ui.enabled=true
+spring.main.allow-bean-definition-overriding=true
+logging.config=src/main/resources/logger.xml

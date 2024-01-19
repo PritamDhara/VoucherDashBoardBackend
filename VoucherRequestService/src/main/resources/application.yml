@@ -1,0 +1,21 @@
+server:
+  port: 8085
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: vouchers
+  application:
+    name: voucher-request
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tulasirao2001@gmail.com
+    password: bdxu pkwd yboz lhna
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+ 

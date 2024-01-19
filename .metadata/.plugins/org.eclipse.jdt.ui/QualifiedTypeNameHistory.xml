@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="feign.codec.ErrorDecoder"/>
+    <fullyQualifiedTypeName name="com.voucherservice.exception.NoVoucherPresentException"/>
+    <fullyQualifiedTypeName name="com.voucherservice.dto.VoucherRequest"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="com.voucherservice.exception.TheseDataIsAlreadyPresentException"/>
+</qualifiedTypeNameHistroy>
