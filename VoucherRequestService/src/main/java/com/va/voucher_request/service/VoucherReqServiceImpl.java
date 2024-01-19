@@ -105,6 +105,7 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 			voucherRequest.setExamResult(newExamResult);
 			try {
 				vrepo.save(voucherRequest);
+				//return statement
 				return voucherRequest;
 			} catch (Exception e) {
 				e.printStackTrace();
