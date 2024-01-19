@@ -13,7 +13,7 @@ import com.va.voucher_request.exceptions.VoucherNotFoundException;
 import com.va.voucher_request.model.VoucherRequest;
 import com.va.voucher_request.model.VoucherRequestDto;
 
-public interface VoucherReqService {
+public interface VoucherReqService { 
 	
 	VoucherRequest requestVoucher(VoucherRequestDto request) throws ScoreNotValidException, ResourceAlreadyExistException;
 

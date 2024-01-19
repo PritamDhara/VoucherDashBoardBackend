@@ -44,26 +44,26 @@ public class VoucherReqController {
 	@Autowired
 	VoucherClient voucherClient;
 	
-	@PostMapping("/voucher")
+	@PostMapping("/voucher") //post request to request for the voucher
     public ResponseEntity<VoucherRequest> requestVoucher(@RequestBody VoucherRequestDto request) throws ScoreNotValidException, ResourceAlreadyExistException {
 		VoucherRequest req = vservice.requestVoucher(request);
 		return new ResponseEntity<VoucherRequest>(req,HttpStatus.OK);
     }
 
-    @GetMapping("/{candidateEmail}")
+    @GetMapping("/{candidateEmail}") //get request to view all the vouchers by candidate's email
     public ResponseEntity<List<VoucherRequest>> getAllVouchersByCandidateEmail(@PathVariable String candidateEmail) throws NotFoundException {
     	List<VoucherRequest> list = vservice.getAllVouchersByCandidateEmail(candidateEmail);
     	return new ResponseEntity<List<VoucherRequest>>(list,HttpStatus.OK);
     }
     
-    @PutMapping("/updateExamDate/{voucherCode}/{newExamDate}")
+    @PutMapping("/updateExamDate/{voucherCode}/{newExamDate}") //put request to update the exam date 
 	public ResponseEntity<VoucherRequest> updateExamDate(@PathVariable String voucherCode,@PathVariable LocalDate newExamDate) throws NotFoundException {
     	VoucherRequest req = vservice.updateExamDate(voucherCode, newExamDate);
     	return new ResponseEntity<VoucherRequest>(req, HttpStatus.OK);
     }
 		
 
-    @PutMapping("/{voucherCode}/{newExamResult}")
+    @PutMapping("/{voucherCode}/{newExamResult}") //put request to update the exam result
     public ResponseEntity<VoucherRequest> updateResultStatus( @PathVariable String voucherCode, @PathVariable String newExamResult) throws NotFoundException {
        
             VoucherRequest updatedVoucherRequest = vservice.updateExamResult(voucherCode, newExamResult);
@@ -71,8 +71,7 @@ public class VoucherReqController {
 
     }
     
-@GetMapping("/assignvoucher/{voucherId}/{emailId}/{voucherrequestId}")
-	
+    @GetMapping("/assignvoucher/{voucherId}/{emailId}/{voucherrequestId}") //get request assigning the respective voucher to candidate's request
     public ResponseEntity<VoucherRequest> assignVoucher(@PathVariable String voucherId,@PathVariable String emailId,@PathVariable String voucherrequestId) throws NotFoundException, VoucherNotFoundException, VoucherIsAlreadyAssignedException, ParticularVoucherIsAlreadyAssignedException {
     	Voucher voucher = voucherClient.getVoucherById(voucherId).getBody();
     	VoucherRequest request = vservice.assignVoucher(voucherId,emailId,voucherrequestId);
@@ -92,21 +91,21 @@ public class VoucherReqController {
     			
     }
     
-    @GetMapping("/getAllVouchers")
+    @GetMapping("/getAllVouchers") //get request to view all the vouchers
     public ResponseEntity<List<VoucherRequest>> getAllVouchers() throws VoucherNotFoundException{
         	List<VoucherRequest> list =	vservice.getAllVoucherRequest();
         	
         	return new ResponseEntity<List<VoucherRequest>>(list,HttpStatus.OK);
     }
     
-    @GetMapping("/allAssignedVoucher")
+    @GetMapping("/allAssignedVoucher") //get request to view all assigned vouchers
     public ResponseEntity<List<VoucherRequest>> getAllAssignedVoucher() throws NoVoucherPresentException
     {
     	List<VoucherRequest> list = vservice.getAllAssignedVoucherRequest();
     	return new ResponseEntity<List<VoucherRequest>>(list,HttpStatus.OK);
     }
     
-    @GetMapping("/allUnAssignedVoucher")
+    @GetMapping("/allUnAssignedVoucher") //get request to view all unassigned vouchers
     public ResponseEntity<List<VoucherRequest>> getAllUnAssignedVoucher() throws NoVoucherPresentException
     {
     	List<VoucherRequest> list = vservice.getAllNotAssignedVoucherRequest();

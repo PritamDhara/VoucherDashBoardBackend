@@ -54,7 +54,6 @@ public class VoucherServiceImpl implements VoucherService {
 				listToBeUploaded.add(v);
 			}
 		}
-//		System.out.println(convertedList);
 		
 		//checking for duplicate data
 		if(listToBeUploaded.isEmpty())

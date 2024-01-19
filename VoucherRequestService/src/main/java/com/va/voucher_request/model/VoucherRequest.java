@@ -20,7 +20,6 @@ public class VoucherRequest {
 	@MongoId
 	private String id;
 	
-//    @Pattern(regexp = "^[a-zA-Z]+$", message = "CandiLocalDate Name must contain only characters (a-z, A-Z)")
 	private String candidateName;
 	
 	private String candidateEmail;

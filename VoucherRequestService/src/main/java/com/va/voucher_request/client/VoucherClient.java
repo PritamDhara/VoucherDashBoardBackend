@@ -9,7 +9,7 @@ import com.va.voucher_request.dto.Voucher;
 import com.va.voucher_request.errordecoder.CustomErrorDecoder;
 
 @FeignClient(url = "http://localhost:9091/voucher",name = "voucher-service",configuration = CustomErrorDecoder.class)
-public interface VoucherClient {
+public interface VoucherClient { //feign client interface to communicate with voucher service
 	
 	@GetMapping("/assignUserInVoucher/{voucherId}/{userEmail}")
 	public ResponseEntity<Voucher> assignUserInVoucher(@PathVariable String voucherId,@PathVariable String userEmail);
