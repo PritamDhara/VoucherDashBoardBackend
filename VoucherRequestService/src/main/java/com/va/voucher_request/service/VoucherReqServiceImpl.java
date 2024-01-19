@@ -30,6 +30,7 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 	@Autowired
 	private VoucherRequestRepository vrepo;
 	
+	//voucherservice client
 	@Autowired
 	VoucherClient voucherClient;
 
