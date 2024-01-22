@@ -100,7 +100,10 @@ public class UserServiceImpl implements UserService {
 //		return null;
 	}
 	
-	
+	 @Override
+	    public Optional<User> getUserByEmail(String userEmail) {
+	        return repo.findByUserEmail(userEmail);
+	    }
 	
 
 

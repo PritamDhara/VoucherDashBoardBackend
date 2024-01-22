@@ -46,6 +46,7 @@ public class VoucherRequestClientController {
 	public ResponseEntity<VoucherRequest> updateExamDate(@PathVariable String voucherCode,@PathVariable LocalDate newExamDate){
     	return voucherReqClient.updateExamDate(voucherCode, newExamDate);
     }
+    
 		
 
     @PutMapping("/{voucherCode}/{newExamResult}")
@@ -77,5 +78,12 @@ public class VoucherRequestClientController {
     public ResponseEntity<List<VoucherRequest>> getAllUnAssignedVoucher(){
     	return voucherReqClient.getAllUnAssignedVoucher();
     }
+    
+    @GetMapping("/getAllCompletedVoucherRequests")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<List<VoucherRequest>> getAllCompletedVoucherRequests(){
+    	return voucherReqClient.getAllCompletedVoucherRequests();
+    }
+
 
 }
