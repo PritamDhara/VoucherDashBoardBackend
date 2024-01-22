@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.va.voucher_request.client.VoucherClient;
 import com.va.voucher_request.dto.Voucher;
+import com.va.voucher_request.exceptions.NoCompletedVoucherRequestException;
 import com.va.voucher_request.exceptions.NoVoucherPresentException;
 import com.va.voucher_request.exceptions.NotFoundException;
 import com.va.voucher_request.exceptions.ParticularVoucherIsAlreadyAssignedException;
@@ -211,6 +212,22 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 		}
 		
 		return notassignedvouchers;
+	}
+
+	@Override
+	public List<VoucherRequest> getAllCompletedVoucherRequest() throws NoCompletedVoucherRequestException {
+		List<VoucherRequest> allrequest = vrepo.findAll();
+		
+		List<VoucherRequest> filteredList = new ArrayList<>();
+		for(VoucherRequest v: allrequest) {
+			if(!v.getExamResult().equalsIgnoreCase("pending")) {
+				filteredList.add(v);
+			}
+		}
+		if(filteredList.isEmpty()) {
+			throw new NoCompletedVoucherRequestException();
+		}
+		return filteredList;
 	}
 
 }

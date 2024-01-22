@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.va.voucher_request.client.VoucherClient;
 import com.va.voucher_request.dto.Voucher;
+import com.va.voucher_request.exceptions.NoCompletedVoucherRequestException;
 import com.va.voucher_request.exceptions.NoVoucherPresentException;
 import com.va.voucher_request.exceptions.NotFoundException;
 import com.va.voucher_request.exceptions.ParticularVoucherIsAlreadyAssignedException;
@@ -71,13 +72,14 @@ public class VoucherReqController {
 
     }
     
-    @GetMapping("/assignvoucher/{voucherId}/{emailId}/{voucherrequestId}") //get request assigning the respective voucher to candidate's request
+@GetMapping("/assignvoucher/{voucherId}/{emailId}/{voucherrequestId}")
+	
     public ResponseEntity<VoucherRequest> assignVoucher(@PathVariable String voucherId,@PathVariable String emailId,@PathVariable String voucherrequestId) throws NotFoundException, VoucherNotFoundException, VoucherIsAlreadyAssignedException, ParticularVoucherIsAlreadyAssignedException {
     	Voucher voucher = voucherClient.getVoucherById(voucherId).getBody();
     	VoucherRequest request = vservice.assignVoucher(voucherId,emailId,voucherrequestId);
-    	String msg = "Hi ,\r\n"
+    	String msg = "Hi " +request.getCandidateName() + ",\r\n"
     	        + "\r\n"
-    	        + "Please find the Pearson Exam voucher code: " + voucher.getVoucherCode() + " [Please schedule the exam directly without converting.]\r\n"
+    	        + "Please find the Pearson Exam voucher code for " + voucher.getExamName() + ": " + voucher.getVoucherCode() + " [Please schedule the exam directly without converting.]\r\n"
     	        + "\r\n"
     	        + "EXAM TO BE SCHEDULED AT THE NEAREST PEARSON VUE CENTRE ONLY. \r\n"
     	        + "\r\n"
@@ -112,5 +114,10 @@ public class VoucherReqController {
     	return new ResponseEntity<List<VoucherRequest>>(list,HttpStatus.OK);
     }
 
-
+    @GetMapping("/getAllCompletedVoucherRequests")
+    public ResponseEntity<List<VoucherRequest>> getAllCompletedVoucherRequests() throws NoCompletedVoucherRequestException
+    {
+    	List<VoucherRequest> list = vservice.getAllCompletedVoucherRequest();
+    	return new ResponseEntity<List<VoucherRequest>>(list,HttpStatus.OK);
+    }
 }

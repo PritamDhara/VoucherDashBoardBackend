@@ -3,6 +3,7 @@ package com.va.voucher_request.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.va.voucher_request.exceptions.NoCompletedVoucherRequestException;
 import com.va.voucher_request.exceptions.NoVoucherPresentException;
 import com.va.voucher_request.exceptions.NotFoundException;
 import com.va.voucher_request.exceptions.ParticularVoucherIsAlreadyAssignedException;
@@ -31,5 +32,6 @@ public interface VoucherReqService {
 	 List<VoucherRequest> getAllAssignedVoucherRequest() throws NoVoucherPresentException;
 	 
 	 List<VoucherRequest> getAllNotAssignedVoucherRequest() throws NoVoucherPresentException;
+	 List<VoucherRequest> getAllCompletedVoucherRequest() throws NoCompletedVoucherRequestException;
 
 }
