@@ -16,5 +16,5 @@ public interface UserService {
 	
 	//abstract method of image Upload in Service Interface
 	String uploadProfileImage(MultipartFile file,String userEmail,String path) throws IOException, UserIsNotPresentWithEmailException, NotAnImageFileException;
-	
+	Optional<User> getUserByEmail(String userEmail);
 }

@@ -25,19 +25,10 @@ public class CustomErrorDecoder implements ErrorDecoder {
 		return FeignException.errorStatus(methodKey, response);
 	}
 
-//	private String getResponseBody(Response response) {
-//        try {
-//            if (response.body() != null) {
-//                return StreamUtils.copyToString(response.body().asInputStream(), Charset.defaultCharset());
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return "Resource not found"; // Default message if the response body is empty
-//    }
 
 	private String getResponseBody(Response response) {
 		try {
+			
 			if (response.body() != null) {
 				try (java.io.Reader reader = response.body().asReader()) {
 					// Parse the JSON response and extract the "message" field

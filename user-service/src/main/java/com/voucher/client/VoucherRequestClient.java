@@ -42,5 +42,14 @@ public interface VoucherRequestClient {
     
     @GetMapping("/allUnAssignedVoucher")
     public ResponseEntity<List<VoucherRequest>> getAllUnAssignedVoucher();
+    
+    @GetMapping("/getAllCompletedVoucherRequests")
+    public ResponseEntity<List<VoucherRequest>> getAllCompletedVoucherRequests();
+    
+    @GetMapping("/sendPendingEmails")
+    public ResponseEntity<List<String>> pendingEmails();
+    
+    @GetMapping("/pendingResultRequests")
+    public ResponseEntity<List<VoucherRequest>> pendingRequests() ;
 
 }
