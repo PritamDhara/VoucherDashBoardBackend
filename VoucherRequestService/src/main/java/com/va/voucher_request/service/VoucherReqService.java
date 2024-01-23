@@ -33,5 +33,8 @@ public interface VoucherReqService {
 	 
 	 List<VoucherRequest> getAllNotAssignedVoucherRequest() throws NoVoucherPresentException;
 	 List<VoucherRequest> getAllCompletedVoucherRequest() throws NoCompletedVoucherRequestException;
+	 List<String> pendingEmails();
+		
+	 List<VoucherRequest> pendingRequests();
 
 }

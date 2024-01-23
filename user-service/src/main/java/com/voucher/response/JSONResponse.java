@@ -11,6 +11,8 @@ public class JSONResponse {
 	private String username;
 	
 	private String name;
+	
+	private String imagePath;
 
 	private List<String> roles;
 
@@ -20,7 +22,7 @@ public class JSONResponse {
 
 	}
 
-	public JSONResponse(String accessToken, String username, String name,List<String> roles) {
+	public JSONResponse(String accessToken, String username, String name, String imagePath,List<String> roles) {
 
 		this.token = accessToken;
 
@@ -28,6 +30,7 @@ public class JSONResponse {
 
 		this.roles = roles;
 		this.name=name;
+		this.imagePath=imagePath;
 
 	}
 
@@ -81,4 +84,13 @@ public class JSONResponse {
 		this.name = name;
 	}
 
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+    
+	
 }

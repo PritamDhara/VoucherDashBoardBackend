@@ -120,4 +120,17 @@ public class VoucherReqController {
     	List<VoucherRequest> list = vservice.getAllCompletedVoucherRequest();
     	return new ResponseEntity<List<VoucherRequest>>(list,HttpStatus.OK);
     }
+    
+    @GetMapping("/sendPendingEmails")
+    public ResponseEntity<List<String>> pendingEmails() {
+    	List<String> pendingEmails = vservice.pendingEmails();
+    	
+    	
+    	return new ResponseEntity<List<String>>(pendingEmails, HttpStatus.OK);
+    }
+    @GetMapping("/pendingResultRequests")
+    public ResponseEntity<List<VoucherRequest>> pendingRequests() {
+    	List<VoucherRequest> pendingRequests = vservice.pendingRequests();
+    	return new ResponseEntity<List<VoucherRequest>>(pendingRequests, HttpStatus.OK);
+    }
 }

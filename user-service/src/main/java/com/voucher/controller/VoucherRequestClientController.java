@@ -20,6 +20,8 @@ import com.voucher.client.VoucherRequestClient;
 import com.voucher.dto.VoucherRequest;
 import com.voucher.dto.VoucherRequestDto;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/requests")
 @EnableFeignClients(basePackages = "com.*")
@@ -84,6 +86,19 @@ public class VoucherRequestClientController {
     public ResponseEntity<List<VoucherRequest>> getAllCompletedVoucherRequests(){
     	return voucherReqClient.getAllCompletedVoucherRequests();
     }
-
+    
+    @SecurityRequirement(name = "api")
+	@GetMapping("/sendPendingEmails")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public ResponseEntity<List<String>> pendingEmails() {
+		return  voucherReqClient.pendingEmails();
+	}
+	
+	@SecurityRequirement(name = "api")
+	@GetMapping("/pendingResultRequests")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<List<VoucherRequest>> pendingRequests() {
+		return voucherReqClient.pendingRequests();
+	}
 
 }

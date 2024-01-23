@@ -34,6 +34,9 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 	//voucherservice client
 	@Autowired
 	VoucherClient voucherClient;
+	
+	@Autowired
+	EmailRequestImpl impl;
 
 	@Override
 	public VoucherRequest requestVoucher(VoucherRequestDto request) throws ScoreNotValidException, ResourceAlreadyExistException {
@@ -229,5 +232,48 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 		}
 		return filteredList;
 	}
+	
+	@Override
+	public List<String> pendingEmails() {
+		List<String> pending = new ArrayList<>();
+		List<VoucherRequest> allrequest = vrepo.findAll();
+		LocalDate today = LocalDate.now();
+		String mentorEmail = "boyinapalli.ravi-chandra@capgemini.com";
+		for(VoucherRequest v: allrequest) {
+			if(v.getExamResult().equalsIgnoreCase("pending")&&v.getPlannedExamDate().isBefore(today)) {
+				
+				pending.add(v.getCandidateEmail());
+				
+ 
+		    	for (String s:pending) {
+		    		String msg = "Hi "+v.getCandidateName().toUpperCase()+","+"\r\n"+
+			    			 "We hope this message finds you well. It has come to our attention that your exam status for the "+v.getCloudPlatform() + " certification is currently marked as pending. " +
+			    		        "To ensure a smooth process and timely updates, we kindly request you to log in to your account and update your exam status as soon as possible.\n\n" +
+			    		        "Your prompt attention to this matter is greatly appreciated.\n\n" +
+			    		        "Best regards,\n" +
+			    		        "VOUCHER DASHBOARD TEAM";
+		    		impl.sendPendingEmail(s,mentorEmail,"Urgent: Update Your Exam Status", msg);
+		    		
+		    		
+		    	}
+			}
+	}
+		return pending;
+ 
+}
+ 
+	@Override
+	public List<VoucherRequest> pendingRequests() {
+		List<VoucherRequest> pendingRequests = new ArrayList<>();
+		List<VoucherRequest> allrequest = vrepo.findAll();
+		LocalDate today = LocalDate.now();
+		for(VoucherRequest v: allrequest) {
+			if(v.getExamResult().equalsIgnoreCase("pending")&&v.getPlannedExamDate().isBefore(today)) {
+				pendingRequests.add(v);
+			}
+		
+	}
+		return pendingRequests;
+}
 
 }
