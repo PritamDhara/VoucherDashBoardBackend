@@ -128,10 +128,9 @@ public class VoucherServiceImpl implements VoucherService {
 		for (Voucher v : allVouchersByPlatform) {
 			LocalDate date = LocalDate.now();
 			if (v.getExpiryDate().isAfter(date)  ) {
-				if(v.getIssuedTo()!=null)
-				{
+				
 					allVouchersAvailable.add(v);
-				}
+				
 				
 			}
 		}

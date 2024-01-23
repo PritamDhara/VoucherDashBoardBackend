@@ -1,5 +1,7 @@
 package com.va.voucher_request.exceptions;
 
+
+
 public class NoCompletedVoucherRequestException extends Exception{
 
 	public NoCompletedVoucherRequestException() {
@@ -10,4 +12,5 @@ public class NoCompletedVoucherRequestException extends Exception{
 		super(string);
 	}
 	
+
 }
