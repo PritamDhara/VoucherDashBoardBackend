@@ -49,6 +49,7 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 		
         // If candidate has requested for the same exam again, throw an exception
 		if (examExists) {
+			
 			throw new ResourceAlreadyExistException(
 					"You have already requested voucher for this particular exam");
 		}

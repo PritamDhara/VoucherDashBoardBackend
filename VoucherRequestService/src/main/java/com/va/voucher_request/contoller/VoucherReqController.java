@@ -40,6 +40,7 @@ public class VoucherReqController {
 	private VoucherReqServiceImpl vservice;
 	@Autowired
 	
+	
 	EmailRequestImpl impl;
  
 	@Autowired
