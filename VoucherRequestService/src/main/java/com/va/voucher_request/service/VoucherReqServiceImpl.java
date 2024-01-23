@@ -30,7 +30,7 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 	@Autowired
 	private VoucherRequestRepository vrepo;
 	
-	//voucherservice client
+	//voucher service client
 	@Autowired
 	VoucherClient voucherClient;
 
@@ -180,7 +180,7 @@ public class VoucherReqServiceImpl implements VoucherReqService {
 		if(allrequest.isEmpty())
 		{
 			throw new NoVoucherPresentException();
-		}
+		} 
 		for(VoucherRequest v:allrequest)
 		{
 			if(v.getVoucherCode()!=null)

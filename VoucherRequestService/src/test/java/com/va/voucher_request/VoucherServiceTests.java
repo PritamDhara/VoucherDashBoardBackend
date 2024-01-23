@@ -54,27 +54,32 @@ class VoucherServiceTests {
         verify(voucherRepository, never()).save(any(VoucherRequest.class));
     }
  
+    
     @Test
-    void testRequestVoucherSuccessful() throws ScoreNotValidException, ResourceAlreadyExistException {
+    void testRequestVoucherAlreadyExists() throws ScoreNotValidException {
         // Arrange
-        VoucherRequestDto requestDto = new VoucherRequestDto();
+    	VoucherRequestDto requestDto = new VoucherRequestDto();
         requestDto.setDoSelectScore(85);
         requestDto.setCandidateEmail("s.k@example.com");
         requestDto.setCloudExam("AWS Certified Solutions Architect");
 
-        when(voucherRepository.findByCandidateEmailAndCloudExam("s.k@example.com", "AWS Certified Solutions Architect"))
-                .thenReturn(Optional.empty());
+        
 
-        // Act
-        VoucherRequest result = voucherService.requestVoucher(requestDto);
+        // Mock the repository response to simulate that a voucher for the same exam and candidate already exists
+        when(voucherRepository.existsByCloudExamAndCandidateEmail(any(), any())).thenReturn(true);
 
-        // Assert
-        assertNotNull(result);
-        assertEquals("Pending", result.getExamResult());
-        verify(voucherRepository, times(1)).findByCandidateEmailAndCloudExam("s.k@example.com", "AWS Certified Solutions Architect");
-        verify(voucherRepository, times(1)).save(any());
+        // Act and Assert
+        assertThrows(ResourceAlreadyExistException.class, () -> {
+            voucherService.requestVoucher(requestDto);
+        });
+
+        // Verify that the repository method was called with the correct parameters
+        verify(voucherRepository, times(1)).existsByCloudExamAndCandidateEmail(
+            requestDto.getCloudExam(), requestDto.getCandidateEmail());
+
+        // Verify that save method was not called
+        verify(voucherRepository, never()).save(any(VoucherRequest.class));
     }
-
  
     @Test
     void testGetAllVouchersByNonexistentCandidateEmail() {
@@ -174,7 +179,7 @@ class VoucherServiceTests {
         when(voucherRepository.findAll()).thenReturn(Collections.emptyList());
 
         assertThrows(VoucherNotFoundException.class, () -> voucherService.getAllVoucherRequest());
-    }
+    } 
     
     @Test
     void testGetAllNotAssignedVoucherRequestNoVouchers() {

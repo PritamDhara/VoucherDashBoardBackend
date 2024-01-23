@@ -17,7 +17,7 @@ public interface VoucherRequestRepository extends MongoRepository<VoucherRequest
 	 
 	boolean existsByCloudExamAndCandidateEmail(String cloudExam , String candiadateEmail);
 	
-	String getExamResultByCloudExamAndCandidateEmail(String examName,  String userEmail);
+	String getExamResultByCloudExamAndCandidateEmail(String examName, String userEmail);
 
 	Optional<VoucherRequest> findByCandidateEmailAndCloudExam(String candidateEmail, String cloudExam);
 
