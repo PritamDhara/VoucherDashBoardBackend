@@ -10,5 +10,6 @@ public class VoucherRequestServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VoucherRequestServiceApplication.class, args);
 	}
+	
 
 }

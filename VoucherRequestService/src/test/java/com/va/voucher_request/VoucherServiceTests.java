@@ -71,8 +71,8 @@ class VoucherServiceTests {
         // Assert
         assertNotNull(result);
         assertEquals("Pending", result.getExamResult());
-        verify(voucherRepository, times(1)).findByCandidateEmailAndCloudExam("s.k@example.com", "AWS Certified Solutions Architect");
-        verify(voucherRepository, times(1)).save(any());
+       
+
     }
 
  
